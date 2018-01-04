@@ -1,6 +1,10 @@
-version: '3'
+version: '3.2'
 services:
   db:
-    build: ./common/postgres
+    image: postgres:9
     ports:
       - "5432:5432"
+    volumes:
+      - type: bind
+        source: ./modules/migration/src/main/resources/db/migration
+        target: /docker-entrypoint-initdb.d
