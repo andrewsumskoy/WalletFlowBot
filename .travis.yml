@@ -15,7 +15,7 @@ jdk:
   - oraclejdk8
 
 script:
-  - sbt ';domain/test;migration/test;core/test;coverage;coverageReport'
+  - sbt ';clean;coverage;domain/test;migration/test;core/test;coverageReport'
 
 #notifications:
 #  webhooks:
