@@ -1,0 +1,12 @@
+#import(myown.models._)
+<%@ val name: String%>
+<%@ val accounts: Seq[AccountView]%>
+Welcome ${name}! I`m your personal finance assistant.
+#if (accounts.isEmpty)
+Create you first account with /newaccount command or simple type like
+`new account 💵Cash`
+#else
+#for(a <- accounts)
+${a.title} ${a.balance.values.map(_.toString).mkString(", ")}
+#end
+#end

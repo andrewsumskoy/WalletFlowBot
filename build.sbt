@@ -42,13 +42,9 @@ lazy val core = project.in(file("modules/core"))
   .settings(
     name := "myown-core",
     libraryDependencies ++= Seq(
-      "ch.qos.logback" % "logback-classic" % "1.2.3",
-      "com.typesafe.scala-logging" %% "scala-logging" % "3.7.2",
-
       "org.postgresql" % "postgresql" % versions.postgresql,
       "org.tpolecat" %% "doobie-core" % versions.doobie,
       "org.tpolecat" %% "doobie-postgres" % versions.doobie,
-      "org.tpolecat" %% "doobie-hikari" % versions.doobie,
       "org.tpolecat" %% "doobie-scalatest" % versions.doobie,
 
       "io.circe" %% "circe-generic" % versions.circe,
@@ -58,3 +54,17 @@ lazy val core = project.in(file("modules/core"))
       "io.monix" %% "monix-cats" % versions.monix,
     )
   ).dependsOn(domain)
+
+lazy val telegram = project.in(file("modules/telegram"))
+  .settings(commonSettings)
+  .settings(
+    name := "myown-telegram",
+    libraryDependencies ++= Seq(
+      "org.tpolecat" %% "doobie-hikari" % versions.doobie,
+      "ch.qos.logback" % "logback-classic" % "1.2.3",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.7.2",
+      "info.mukel" %% "telegrambot4s" % "3.0.14",
+      "org.scalatra.scalate" %% "scalate-core" % "1.8.0",
+      "com.github.pureconfig" %% "pureconfig" % "0.8.0"
+    )
+  ).dependsOn(core, migration)

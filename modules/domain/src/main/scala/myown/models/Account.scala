@@ -11,10 +11,15 @@ trait Account {
   def balance: Map[Currency, Money]
 }
 
+trait AccountView {
+  def title: String
+  def balance: Map[Currency, Money]
+}
+
 case class Account0(
   id: Account.Id,
   userId: User.Id,
   title: String,
   balance: Map[Currency, Money],
   createAt: TS
-) extends Account
+) extends Account with AccountView
